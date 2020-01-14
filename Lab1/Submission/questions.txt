@@ -1,0 +1,131 @@
+PART 1
+
+Q1.
+    initialization makes pointer from integer without a cast
+    Pointers should be initialized with a memory address to point.
+    The first line gives an integer instead of memory address causing the error.
+    The error can be fixed by splitting up the first line into 3 different lines, a line to set a pointer, another to initialize 3, and the last one to set variable a to the address of integer b. 
+    
+    Correct:
+
+    void test1() {
+        int *a;
+        int b = 3;
+	a = &b;
+        *a = *a +2;
+	print("%d", *a);
+    }
+    
+Q2.
+   incompatible pointer to integer conversion assigning to 'int' from 'int *'; dereference with * [-Wint-conversion]
+   int* a, b; is misleading since it only makes variable a a pointer, either do int *a, *b or need to make 2 separate int*.
+   
+   Correct:
+
+   void test1() {
+     int* a;
+     int* b;
+     a = (int*) malloc(sizeof(int));
+     b = (int*) malloc(sizeof(int));
+     if (!(a && b)){
+        printf("Out of memory");
+        exit(-1); 
+     }
+     *a = 2;
+     *b = 3;
+  }
+   
+
+Q3.
+   malloc allocates number of bytes so need to do 1000 * sizeof(int) to get all the bytes for 1000 integer
+
+   Correct:
+
+   void test3(){
+     int i, *a = (int*) malloc(1000*sizeof(int));
+     if (!a){
+       printf("Out of memory");
+       exit(-1); 
+     }
+     for (i = 0; i < 1000; i++) 
+       *(i+a)=i;
+
+}
+
+Q4.
+   When create an array of pointers using double pointers, you need to dynamically allocalte memory for every row
+
+   Correct:
+
+   void test4(){
+      int **a = (int**) malloc(3*sizeof(int*));
+
+      for (int i=0; i < 3; i++){
+
+        a[i] = (int*)malloc(100*sizeof(int*));
+
+      }
+
+      a[1][1] = 5;
+   }
+Q5.
+   In the line "if (!a)", a should have been dereference to get the value of a not the address.
+
+   Correct:
+   
+   Void test5(){
+     int *a = (int*) malloc(sizeof(int)); 
+     scanf("%d",a);
+ 
+     if (!*a)
+        printf("Value is 0\n"); 
+     
+
+   }
+
+PART 2
+
+   y_1[n] = x[n-1] + x[n] + x[n+1] 
+
+   - data parallelism
+   - No reading and loading data from y_1 unlike y_2, you just need to write to y_1
+Part 4
+Q1.
+   GeoForce GTX 750 Ti
+
+Q2.
+   65535 * 512 = 33553920
+Q3.
+   If the maximum number of threads not needed, launching maximum number of threads will just be unefficient and costly.
+
+Q4.
+
+Q5.
+   2147483648
+
+Q6.
+   "main" memory of the GPU, DRAM.
+   - has global scope 
+   
+Q7.
+   65536
+
+Q8.
+   Used for data that will not change over the course of a kernel execution and is read only.
+
+Q9.
+   49152
+
+Q10.
+   Memory with scope as a block located in streaming multiprocessor
+Q11.
+   1024 * 1024 * 64
+
+Q12.
+   2147483647 x 65535 x 65535
+
+Q13.
+   32     
+
+Q14.
+   Number of threads that multiprocessor can executes cocurrently.
